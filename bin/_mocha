@@ -405,7 +405,7 @@ if (program.watch) {
 }
 
 function exitLater(code) {
-  process.on('exit', function() { process.exit(code) })
+  process.on('exit', function() { process.exit(Math.min(code, 255)) })
 }
 
 function exit(code) {
@@ -413,7 +413,7 @@ function exit(code) {
   // https://github.com/joyent/node/issues/6247 is just one bug example
   // https://github.com/visionmedia/mocha/issues/333 has a good discussion
   function done() {
-    if (!(draining--)) process.exit(code);
+    if (!(draining--)) process.exit(Math.min(code, 255));
   }
 
   var draining = 0;

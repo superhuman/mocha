@@ -345,7 +345,7 @@ if (program.watch) {
   process.on('SIGINT', function(){
     showCursor();
     console.log('\n');
-    process.exit();
+    process.exit(130);
   });
 
 
@@ -428,7 +428,10 @@ function exit(code) {
   done();
 }
 
-process.on('SIGINT', function() { runner.abort(); })
+process.on('SIGINT', function() {
+  runner.abort();
+  process.exit(130);
+})
 
 /**
  * Parse list.
